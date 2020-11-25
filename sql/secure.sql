@@ -68,8 +68,12 @@ CREATE TABLE IF NOT EXISTS `password_recovery_codes` (
   PRIMARY KEY (`users_id`),
   CONSTRAINT `fk_password_recovery_codes_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `users` (`id`)
+    REFERENCES `users.users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 COMMENT = 'Коды для восстановления пароля';
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

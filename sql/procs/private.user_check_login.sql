@@ -8,9 +8,10 @@ declare v_salt, v_encrypted_password varchar(64);
 select sql_calc_found_rows
     password_salt
 into v_salt from
-    user_identity_data
+    user_identity_data uid
+    join users.users u on (u.id = uid.users_id)
 where
-    login = user_login;
+    login = user_login and u.user_statuses_id = 2;
 
 if found_rows() = 0 then
 	signal err_invalid_login_or_password set message_text = 'Login has not been found';
@@ -29,19 +30,6 @@ where
 if found_rows() = 0 then
 	signal err_invalid_login_or_password set message_text = 'Invalid password';
 end if;
-
-select 
-    id,
-    public_name,
-    created_at,
-    updated_at,
-    last_loggedin_at,
-    registration_methods_id,
-    user_statuses_id
-from
-    users.users
-where
-    id = user_id;
 end$$
 DELIMITER ;
 

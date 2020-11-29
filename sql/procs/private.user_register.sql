@@ -17,7 +17,7 @@ begin
     set v_registration_method_id = user_data ->> '$.registration_methods_id';
     start transaction;
     insert into users.users(public_name, last_loggedin_at, registration_methods_id, user_statuses_id)
-        values(v_public_name, null, v_registration_method_id, 1);
+        values(v_public_name, null, v_registration_method_id, 2);
     set user_id := last_insert_id();
     set v_salt := sha2(unix_timestamp(now(6)), 256);
     call private.user_encrypt_password(user_password, v_salt, v_encrypted_password);
@@ -27,3 +27,4 @@ begin
     commit;
 end$$
 DELIMITER ;
+

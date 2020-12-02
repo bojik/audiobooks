@@ -1,0 +1,58 @@
+Mutation:
+    type: object
+    config:
+        fields:
+            registerUser:
+                type: Int!
+                resolve: '@=mutation("App\\Mutation\\UserRegistrationMutation", [args["userLogin"], args["userPassword"], args["publicName"]])'
+                args:
+                    userLogin:
+                        type: String!
+                    userPassword:
+                        type: String!
+                    publicName:
+                        type: String!
+            login:
+                type: Int!
+                resolve: '@=mutation("App\\Mutation\\UserLoginMutation", [args["login"], args["password"]])'
+                args:
+                    login:
+                        type: String!
+                    password:
+                        type: String!
+            changePassword:
+                type: Int!
+                resolve: '@=mutation("App\\Mutation\\UserChangePasswordMutation", [args["login"], args["oldPassword"], args["newPassword"]])'
+                args:
+                    login:
+                        type: String!
+                    oldPassword:
+                        type: String!
+                    newPassword:
+                        type: String!
+            createRecoveryCode:
+                type: String!
+                resolve: '@=mutation("App\\Mutation\\UserPasswordRecoveryCodeMutation", [args["login"]])'
+                args:
+                    login:
+                        type: String!
+            restorePassword:
+                type: Int!
+                resolve: '@=mutation("App\\Mutation\\UserPasswordRestoreMutation", [args["login"], args["code"], args["password"]])'
+                args:
+                    login:
+                        type: String!
+                    code:
+                        type: String!
+                    password:
+                        type: String!
+            changeLogin:
+                type: Int!
+                resolve: '@=mutation("App\\Mutation\\UserChangeLoginMutation", [args["login"], args["password"], args["newLogin"]])'
+                args:
+                    login:
+                        type: String!
+                    password:
+                        type: String!
+                    newLogin:
+                        type: String!

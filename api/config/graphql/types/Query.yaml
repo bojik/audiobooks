@@ -1,0 +1,10 @@
+Query:
+    type: object
+    config:
+        fields:
+            ping:
+                type: String!
+                resolve: '@=resolver("App\\Resolver\\PongResolver", [args["testString"]])'
+                args:
+                    testString:
+                        type: String!
